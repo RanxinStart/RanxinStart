@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>L壁纸</title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+				overflow: hidden;
+			}
+			.外框{
+				background-image: url(https://img.ffis.me/images/2019/01/23/49361111_p0.jpg);
+				background-size: 110% auto;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="外框" ID="k_j">
+			<div ID="fenKuai0"></div>
+			<div ID="fenKuai1"></div>
+			<div ID="fenKuai2"></div>
+			<div ID="fenKuai3"></div>
+			<div ID="fenKuai4"></div>
+			<div ID="fenKuai5"></div>
+			<div ID="fenKuai6"></div>
+			<div ID="fenKuai7"></div>
+			<div ID="fenKuai8"></div>
+			<div ID="fenKuai9"></div>
+			<div ID="fenKuai10"></div>
+			<div ID="fenKuai11"></div>
+			<div ID="fenKuai12"></div>
+			<div ID="fenKuai13"></div>
+			<div ID="fenKuai14"></div>
+			<div ID="fenKuai15"></div>
+			<div ID="fenKuai16"></div>
+			<div ID="fenKuai17"></div>
+			<div ID="fenKuai18"></div>
+			<div ID="fenKuai19"></div>
+			<div ID="fenKuai20"></div>
+			<div ID="fenKuai21"></div>
+			<div ID="fenKuai22"></div>
+			<div ID="fenKuai23"></div>
+			<div ID="fenKuai24"></div>
+			<div ID="fenKuai25"></div>
+			<div ID="fenKuai26"></div>
+			<div ID="fenKuai27"></div>
+			<div ID="fenKuai28"></div>
+			<div ID="fenKuai29"></div>
+			<div ID="fenKuai30"></div>
+			<div ID="fenKuai31"></div>
+			<div ID="fenKuai32"></div>
+			<div ID="fenKuai33"></div>
+			<div ID="fenKuai34"></div>
+		</div>
+	</body>
+	<script>
+		
+			//       	可设定的基础值
+			var ckHeight = window.innerHeight;				//窗口高度			
+			var ckWidth = window.innerWidth;				//窗口宽度
+			var fk = 35 ;									//分块数量5
+			var 分块边框宽度  = "0";						//分块边框宽度
+			var 分块边框颜色  = "#ca856a";					//分块边框颜色 
+			var 刷新频率 = 100 ;								//越小出现弹幕就越快
+			var 过渡时间 = 6;								//经过时间,越小越快
+			
+			var 词库 = [
+				'_(┐「ε:)_','_(:3 」∠)_','(￣y▽￣)~*','・゜・(PД`q｡)・゜・',
+				'(ง •̀_•́)ง','(•̀ᴗ•́)و ̑̑  ヽ(•̀ω•́ )ゝ','(,,• ₃ •,,)','(｡˘•ε•˘｡)','(=ﾟωﾟ)ﾉ',
+				'(○’ω’○)','(´・ω・`)','ヽ(･ω･｡)ﾉ','(。-`ω´-)','(´・ω・`)','(´・ω・)ﾉ',
+				'(ﾉ･ω･)ﾉﾞ','(♥ó㉨ò)ﾉ♡','(ó㉨ò)','・㉨・','( ・◇・)？','ヽ(*´Д｀*)ﾉ',
+				'(´°̥̥̥̥̥̥̥̥ω°̥̥̥̥̥̥̥̥｀)','(╭￣3￣)╭♡','(☆ﾟ∀ﾟ)','⁄(⁄ ⁄•⁄ω⁄•⁄ ⁄)⁄.','(´-ι_-｀)',
+				'(/≥▽≤/)','ヾ(o◕∀◕)ﾉ','★°*\(￣▽￣)/$*★','ヾ (o ° ω ° O ) ノ゙','╰(*°▽°*)╯',
+				'(｡◕ˇ∀ˇ◕','o(*≧▽≦)ツ',' ≖‿≖✧','>ㅂ<','ˋ▽ˊ','\(•ㅂ•)/♥',   
+				'눈_눈',',,U‸U,,','（/TДT)/',
+				'ʅ（´◔౪◔）ʃ','(｡☉౪ ⊙｡)','o(*≧▽≦)ツ',
+				'(●^w^●)ﾉ♥','<(▰˘◡˘▰)>','｡◕‿◕｡','(｡・`ω´･)','(♥◠‿◠)ﾉ','ʅ(‾◡◝)',
+				'(≖ ‿ ≖)✧','（´∀｀*)','（＾∀＾）','(o^∇^o)ﾉ','ヾ(=^▽^=)ノ','(*￣∇￣*)',
+				'(*´∇｀*)','(*ﾟ▽ﾟ*)','(｡･ω･)ﾉﾞ','(≡ω≡．)','(｀･ω･´)','(´･ω･｀)','(●´ω｀●)φ',
+				'(/= _ =)/~┴┴','(/"≡ _ ≡)/~┴┴','(╯‵□′)╯︵┻━┻',
+				'(┙>∧<)┙へ┻┻','（╯－＿－）╯╧╧',
+				'(╬▔皿▔)','(╬￣皿￣)凸','(｀･д･´)','(ノ｀Д´)ノ','(ﾟ皿ﾟﾒ)','(＃｀皿´)','( -д-)ﾉ',       
+				'（°ο°）','Σ( ° △ °|||)︴',' ∑(っ °Д °;)っ','(°□°；)','(⊙□⊙)','( ° ▽、° )',        
+				'╮(╯▽╰)╭','╮(╯_╰)╭','(￣▽￣!) ','（￣工￣lll）','(﹁_﹁)',
+				'ㄟ( ▔, ▔ )ㄏ','(*´Д｀*)',
+				'┌( ಠ_ಠ)┘','٩(͡๏̯͡๏)۶','٩͡[๏̯͡๏]۶','٩(×̯×)۶','(　´_ゝ｀)',
+				'（・(ｪ)・）','（´(ｪ)｀）','( >﹏<。)',
+				'( *￣▽￣)((≧︶≦*)','o(￣ヘ￣*o)','o(*≧▽≦)ツ','o(*￣▽￣*)ブ','(ㄒoㄒ)/','┏(゜ロ゜;)┛',
+				'<(￣︶￣)>','[]~(￣▽￣)~*','(￣ˇ￣)','(￣﹏￣)','(‵﹏′)','(￣ε(#￣)','(☆▽☆)y',
+				' (￣.￣)','╮(￣▽￣)╭','(￣▽￣)~*','(⊙ˍ⊙)','(￣.￣)+',
+				'╮(╯▽╰)╭','(=￣ω￣=)','(￣３￣)a','(￣0 ￣)y','(。_。)',
+				' (＞﹏＜) ','(→_→)','(￣o￣) . z Z','m( _　_ )m',' (ˇˍˇ)','o(￣ヘ￣*o)',
+				];
+			
+			//			预留保存的值
+			var ck_fk_Z;									//储存一个块的DIV高宽
+			var 一个变化值 = new Array ;						//创建一个存储记录DIV生成的数组
+			var iii = 0 ;									//上一个创建的数组从何开始
+	
+			//  		第一步做背景
+			function 分块执行(){								//送代循环
+			var ck_fk = (ckHeight / fk);  					//窗口高度÷5的分块高度数值
+			var 分块稀释数量 = fk - 1 ;							//因为要把自己0 的线宽分给除了自己的其他DIV
+			var 分块边框宽度的剥分值 = 分块边框宽度 / 分块稀释数量 ;			
+			for(var i = 0;i < fk;i++){	 					//循环5次			
+			var divID = "fenKuai" + i;						//送代ID绑定
+			var fenkuai = document.getElementById(divID);	//循环送代绑定divID	
+			var ck_fk_J = ck_fk - 分块边框宽度;						//减去要给边框留的宽度
+				ck_fk_Z = ck_fk_J + 分块边框宽度的剥分值 ;			//原大小加上分出来的线宽
+			fenkuai.style.height = ck_fk_Z + "px" ;			//改变分块的高度是ck_fk  (窗口高度÷5的分块数值)
+			if( i == 0 ){									//判定是不是第一个 第一个上边框不需要
+				fenkuai.style.borderTop = "none"
+			}else{
+				fenkuai.style.borderTop = "solid"+ 分块边框颜色 ;		//给需要的边框加上颜色
+				fenkuai.style.borderTopWidth = 分块边框宽度  + "px";		//给需要的边框加上线宽
+			}
+			}
+			}
+			//			第一步结束
+			
+			//			第二步创建移动节点并发射
+			function 移动节点(){
+				
+				var 随机数 = {
+				出现块 : Math.floor(Math.random() * fk),
+				词库 : Math.floor(Math.random() * 词库.length),
+				渐变长度 : Math.floor(Math.random() * 100) + 200,
+				随机颜色A :Math.floor(Math.random() * 150) + 90,
+				随机颜色B :Math.floor(Math.random() * 100) + 50,
+				随机颜色C :Math.floor(Math.random() * 150) + 100
+				}
+				// console.log(随机数.出现块);
+				
+				function P标签以及内容(){								//创建节点P标签 并设置Class
+					词库P标签 = document.createElement("p");			//创建P标签
+					词库P内容 = document.createTextNode(词库[随机数.词库]);		//创建文本
+					词库P标签.appendChild(词库P内容);						//融合P加文本
+//					词库P标签.classList.add("文字");					//给融合好的P标签加Class
+					//////////////////////////////////////////////////
+					正方形DIV = document.createElement("div");		//创建DIV
+//					正方形DIV.classList.add("zfx");					//给DIV标签加Class
+					正方形DIV.appendChild(词库P标签);					//融合DIV+P标签
+				}
+				function 移动组件和渐变条(){
+					移动组件 = document.createElement("div");			//创建DIV
+//					移动组件.classList.add("主要移动组件");				//给DIV加Class
+					//////////////////////////////////////////////////
+					渐变条DIV = document.createElement("div");		//创建DIV
+//					渐变条DIV.classList.add("cfx");					//给DIV加Class
+					//////////////////////////////////////////////////
+					移动组件.appendChild(正方形DIV);
+					移动组件.appendChild(渐变条DIV);
+					console.log(移动组件);	
+				}
+				function 添加CSS样式(){
+					var 文字大小 = ck_fk_Z / 1.5;
+					词库P标签.style.lineHeight = ck_fk_Z + "px";
+					词库P标签.style.fontSize = 文字大小 + "px" ;
+					渐变条DIV.style.height = ck_fk_Z + "px";
+					渐变条DIV.style.float = "right";
+					渐变条DIV.style.width = 随机数.渐变长度 + "px";
+					渐变条DIV.style.background = "linear-gradient(to right, rgba(" + 随机数.随机颜色A + "," + 随机数.随机颜色B + "," + 随机数.随机颜色C + ",0), rgba(" + 随机数.随机颜色A + "," + 随机数.随机颜色B + "," + 随机数.随机颜色C + ",1))";
+					正方形DIV.style.height = ck_fk_Z + "px";
+					正方形DIV.style.float = "right";
+					正方形DIV.style.minWidth = ck_fk_Z + "px";
+					正方形DIV.style.borderRadius = "0px 10px 10px 0px";
+					正方形DIV.style.backgroundColor = "rgb(" + 随机数.随机颜色A + "," + 随机数.随机颜色B + "," + 随机数.随机颜色C + ")";
+					正方形DIV.style.padding = "0px 10px" ;
+					移动组件.style.position = "absolute" ;
+					移动组件.style.paddingTop = "0px" ; 
+					移动组件.style.height = "inherit" ; 
+					移动组件transitionTimingFunction = "linear" ;
+					//emmmmmmmmmmmmm
+					var wenZhiChangDu = 词库[0].length * 文字大小 + 50;
+					var 移动组件总长度 = 随机数.渐变长度 + wenZhiChangDu ;
+					移动组件.style.left = "-" + 移动组件总长度 + "px" ;
+					移动组件.style.width = 移动组件总长度 + "px" ;
+					移动组件.style.transition = 过渡时间 + "s" ;
+					// console.log(wenZhiChangDu);
+				}
+				function 植入到分块条(){
+					var divID = "fenKuai" + 随机数.出现块 ;
+					var fenkuai = document.getElementById(divID);
+					复制块 = 移动组件.cloneNode(true);
+					一个变化值[一个变化值.length] = 复制块 ;
+					
+					setTimeout(function(){
+						复制块.style.left = "100%" ;
+						移动节点();
+						},刷新频率);
+						
+					var 过渡时间ms = 过渡时间 * 1000 ;
+					var 删除时间 = 刷新频率 + 过渡时间ms + 5000 ;
+					setTimeout(function(){ 
+						fenkuai.removeChild(一个变化值[iii]);
+						// 移动节点();
+						iii += 1 ;
+						},删除时间);
+						
+					fenkuai.appendChild(复制块);
+				}
+				P标签以及内容();
+				移动组件和渐变条();
+				添加CSS样式();
+				植入到分块条();
+			}
+			//  		第二步结束
+
+			分块执行();
+			移动节点();
+	</script>
+</html>

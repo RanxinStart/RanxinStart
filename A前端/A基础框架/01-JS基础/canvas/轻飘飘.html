@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style type="text/css">
+			* {
+				margin: 0;
+			}
+
+			canvas {
+				/* background-color: #ea66a6; */
+				display: block;
+			}
+
+			body {
+				background-image: url(../图片image/0112.png);
+				background-size: 100% auto;
+				background-position: center;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="Canvas">
+			你的浏览器版本过低，请先升级你的浏览器！
+		</canvas>
+		<script type="text/javascript">
+		"use strict";
+			//		面对对象		//
+			function 生成雪花(obj) {
+				this._Init(obj);
+			}
+			生成雪花.prototype = {
+				_Init: function(obj) {
+					this.大小 = obj.大小 || 1;
+					this.位置X = obj.位置X || 0;
+					this.位置Y = obj.位置Y || 0;
+					this.下落速度 = obj.下落速度 == 0 ? 0 : obj.下落速度 || 2;
+					this.漂泊速度 = obj.漂泊速度 == 0 ? 0 : obj.漂泊速度 || 0.5;
+					this.旋转速度 = obj.旋转速度 || 1;
+					this.旋转角度 = obj.旋转角度 < 0.5 ? (-1) : 1;
+					this.旋转 = obj.旋转 == false ? false : true;
+					this._角度 = 0;
+				},
+				创建雪花: function(cvs, MyImg, obj) {
+					cvs.save();
+					cvs.translate(this.位置X, this.位置Y);
+					obj.旋转 ? cvs.rotate((obj._角度 += (Math.random() * this.旋转角度) * this.旋转速度) * Math.PI / 180) : [];
+					cvs.drawImage(MyImg,
+						-((this.大小 * MyImg.width) / 2),
+						-((this.大小 * MyImg.height) / 2),
+						this.大小 * MyImg.width,
+						this.大小 * MyImg.height);
+					cvs.restore();
+				},
+				_落下: function(obj) {
+					obj.位置Y += obj.下落速度;
+					if (obj.位置Y > 浏览器H + obj.大小 * MyImg.height / 2) {
+						obj.位置Y = -(obj.大小 * MyImg.height / 2);
+					}
+					if (obj.位置Y < -(obj.大小 * MyImg.height / 2)) {
+						obj.位置Y = 浏览器H + obj.大小 * MyImg.height / 2;
+
+					}
+				},
+				_左右漂泊: function(obj) {
+					obj.位置X += obj.漂泊速度;
+					if (obj.位置X > (浏览器W + (obj.大小 * MyImg.width) / 2)) {
+						obj.位置X = -(obj.大小 * MyImg.width / 2);
+					}
+					if (obj.位置X < -(obj.大小 * MyImg.width / 2)) {
+						obj.位置X = 浏览器W + obj.大小 * MyImg.width / 2;
+					}
+				},
+				内置计时器: function(fps, ka, obj, fn) {
+					var Nac = 0;
+					setInterval(function() {
+						Nac++;
+						if (Nac > fps / ka) {
+							Nac = 0;
+							fn(obj);
+						}
+					}, 1000 / fps);
+				}
+			}
+
+			function setRandom(min, max) {
+				return min + (Math.random() * (max - min));
+			}
+		</script>
+		<script type="text/javascript">
+			"use strict";
+			function $(id) {
+				return document.getElementById(id);
+			}
+			var 浏览器W = window.innerWidth;
+			var 浏览器H = window.innerHeight;
+
+			var _cvs = document.createElement("canvas");
+			var _cvs$ = _cvs.getContext("2d");
+
+			var canvas = $("Canvas");
+			var canvas$ = canvas.getContext("2d");
+			canvas.width = _cvs.width = 浏览器W;
+			canvas.height = _cvs.height = 浏览器H;
+
+			window.onresize = function() {
+				浏览器W = window.innerWidth;
+				浏览器H = window.innerHeight;
+				canvas.width = _cvs.width = 浏览器W;
+				canvas.height = _cvs.height = 浏览器H;
+			}
+
+			var 雪花 = new Array();
+			var 数量 = 600;
+
+			var MyImg = document.createElement("canvas");
+			var XXD$ = MyImg.getContext("2d");
+			MyImg.width = 50;
+			MyImg.height = 50;
+			XXD$.fillStyle = "#fff";
+			XXD$.fillRect(0, 0, 50, 50);
+
+			// MyImg.onload = function() {
+			生成雪花.prototype.内置计时器(60, 60, null, XianS);
+			for (var i = 0; i < 数量; i++) {
+				雪花[i] = new 生成雪花({
+					/* 大小，位置X，位置Y
+					下落速度，漂泊速度，旋转速度，旋转角度，旋转*/
+
+
+					位置X: (Math.random() * 浏览器W),
+					位置Y: (Math.random() * 浏览器H),
+					下落速度: -0.5,
+					漂泊速度: -0.5,
+					旋转: true,
+					旋转角度: Math.random(),
+					旋转速度: setRandom(0.6, 1.2),
+					大小: setRandom(0.001, 0.05)
+				});
+			}
+
+			function XianS() {
+				_cvs$.clearRect(0, 0, canvas.width, canvas.height);
+				canvas$.clearRect(0, 0, canvas.width, canvas.height);
+				for (i = 0; i < 数量; i++) {
+					雪花[i]._落下(雪花[i]);
+					雪花[i]._左右漂泊(雪花[i]);
+					雪花[i].创建雪花(_cvs$, MyImg, 雪花[i]);
+				}
+				canvas$.globalAlpha = 0.8;
+				canvas$.drawImage(_cvs, 0, 0); //呈现
+			}
+
+			function 更改速度() {
+				for (var i = 0; i < 雪花.length; i++) {
+						var XX = setRandom(-2,-0.4);
+						雪花[i].下落速度 = XX;
+						雪花[i].漂泊速度 = XX;
+				}
+			}
+			生成雪花.prototype.内置计时器(0.1, 0.1, null, 更改速度);
+			// }
+		</script>
+	</body>
+</html>

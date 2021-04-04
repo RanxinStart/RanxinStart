@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			canvas{
+				margin: 100px 0 0 100px;
+				outline: 2px solid #6cf;
+			}
+		</style>
+	</head>
+	<body style="background-color: #CCC;">
+		<!-- 不要用CSS调整大小 -->
+		<canvas id="MyCanvas" width="500px" height="500px">
+			<!-- 浏览器不支持canvas时会把它当作div，显示里面的内容！ -->
+		</canvas>
+		<script type="text/javascript">
+			var MyCanvas = document.getElementById("MyCanvas");
+			var MyCanvas$ = MyCanvas.getContext("2d");				
+
+			MyCanvas$.moveTo(250, 0);   //某点开始
+			MyCanvas$.lineTo(450, 450);	//直线到某点
+			MyCanvas$.lineTo(50, 150);	
+			MyCanvas$.lineTo(450, 150);
+			MyCanvas$.lineTo(50, 450);
+			MyCanvas$.closePath();
+			MyCanvas$.strokeStyle = "#fff";  //线颜色
+			MyCanvas$.lineWidth =5;			 //线宽
+			MyCanvas$.stroke();				 //设置为实线
+			MyCanvas$.fillStyle = "skyblue";
+			MyCanvas$.fill("!!!!",250,250);
+			
+			MyCanvas$.beginPath();
+			MyCanvas$.moveTo(0,250);
+			MyCanvas$.lineTo(500,250);
+			MyCanvas$.moveTo(250,0);
+			MyCanvas$.lineTo(250,500);
+			MyCanvas$.lineWidth = "0.5";
+			MyCanvas$.strokeStyle = "red";
+			MyCanvas$.stroke();
+			
+			MyCanvas$.beginPath();
+			MyCanvas$.fillStyle = "#000";
+			MyCanvas$.font = "30px 微软雅黑"
+			MyCanvas$.textAlign ="center";
+			MyCanvas$.textBaseline = "middle";
+			MyCanvas$.fillText("!!!!",250,250);
+			
+		</script>
+	</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>奇点</title>
+	</head>
+	<style type="text/css">
+		.fontS5 {
+			font-size: 25px;
+		}
+
+		.classA {
+			color: #6cf;
+		}
+
+		.classB {
+			color: #f00;
+		}
+	</style>
+	<script src="./vue.js" type="text/javascript" charset="utf-8"></script>
+	<body>
+		<div id="AppOne">
+			<!-- class值是固定不变的 -->
+			<!-- 只有动态的class才会动态改变 -->
+			<!-- 只有部分属性有这个特性.. -->
+			<p class="fontS5" :class="className">class绑定的一段文字</p>
+			<button @click="classA">使用样式A</button>
+			<button @click="classB">使用样式B</button>
+			<hr>
+			<p><a :href="Url">链接到{{UrlObjName}}</a></p>
+			<button @click="UrlA">使用链接百度</button>
+			<button @click="UrlB">使用链接B站</button>
+			<hr>
+			<p class="fontS5" :style="{color:styleName}">style绑定的一段文字</p>
+			<input v-model="styleName" /><button @click="upDateColor">改为天依蓝</button>
+			<hr>
+			<p :class="{fontS5:ifData}">如果动态class是对象..</p>
+			<p>当前class..fontS5的值为{{ifData}}</p>
+			<button @click="qh">点击切换</button>
+			<!-- 当然还有数组的情况 -->
+		</div>
+	</body>
+	<script type="text/javascript">
+		var vm = new Vue({
+			el: "#AppOne",
+			data: {
+				className: "",
+				ifData: true,
+				Url: "https://www.baidu.com",
+				UrlObjName: "百度",
+				styleName: "#f00"
+			},
+			methods: {
+				classA: function() {
+					this.className = "classA";
+				},
+				classB: function() {
+					this.className = "classB";
+				},
+				UrlA: function() {
+					this.Url = "https://www.baidu.com";
+					this.UrlObjName = "百度";
+				},
+				UrlB: function() {
+					this.Url = "https://www.bilibili.com";
+					this.UrlObjName = "哔哩哔哩";
+				},
+				qh: function() {
+					this.ifData = !this.ifData;
+				},
+				upDateColor: function() {
+					this.styleName = "#6cf";
+				}
+			}
+		});
+	</script>
+</html>

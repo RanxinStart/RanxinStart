@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>奇点</title>
+	</head>
+	<script src="./vue.js" type="text/javascript" charset="utf-8"></script>
+	<body>
+		<div id="app">
+			<span v-bind:title="message">
+				<!-- 传输值 -->
+				<button type="button" v-on:click="clickName1">点击显示/隐藏文字</button>
+				<p v-if="boolName1">
+					<!-- 传输判断 -->
+					根据data值判断是否显示该标签
+				</p>
+			</span>
+
+		</div>
+	</body>
+	<script type="text/javascript">
+		var vm = new Vue({
+			el: "#app",
+			data: {
+				message: "动态信息",
+				boolName1: true,
+			},
+			methods: {
+				clickName1: function(e) {
+					// 修改data值
+					console.log("触发了clickName1的点击事件")
+					this.boolName1 = !this.boolName1;
+				}
+			}
+		});
+	</script>
+</html>

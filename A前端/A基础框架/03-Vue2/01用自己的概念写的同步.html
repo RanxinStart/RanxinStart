@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>奇点</title>
+	</head>
+	<script src="./vue.js" type="text/javascript" charset="utf-8"></script>
+	<body>
+		<div id="AppOne">
+			<input type="text" v-on:keyup="changeInfo">
+			<p>hello {{message}}</p>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var vm = new Vue({
+			el: "#AppOne",
+			data: {
+				message: "动态信息"
+			},
+			methods: {
+				changeInfo: function(e) {
+					this.message = e.path[0].value;
+				}
+			}
+		});
+	</script>
+</html>

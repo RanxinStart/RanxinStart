@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			canvas{
+				margin: 100px 0 0 100px;
+				outline: 2px solid #6cf;
+			}
+		</style>
+	</head>
+	<body style="background-color: #CCC;">
+		<!-- 不要用CSS调整大小 -->
+		<canvas id="MyCanvas" width="500px" height="500px">
+			<!-- 浏览器不支持canvas时会把它当作div，显示里面的内容！ -->
+		</canvas>
+		<script type="text/javascript">
+			var MyCanvas = document.getElementById("MyCanvas");
+			var MyCanvas$ = MyCanvas.getContext("2d");				
+
+			MyCanvas$.moveTo(50, 50);   //某点开始
+			MyCanvas$.lineTo(50, 450);	//直线到某点
+			MyCanvas$.lineTo(450, 450); 
+			// MyCanvas$.closePath();
+			
+			MyCanvas$.strokeStyle = "#fff";  //线颜色
+			MyCanvas$.lineWidth =2;			 //线宽
+			MyCanvas$.stroke();				 //设置为实线
+			
+			MyCanvas$.fill();
+			
+		</script>
+	</body>
+</html>

@@ -1,0 +1,22 @@
+Ini_set("ini配置文件中的项",值);页面单独的修改自身ini文件配置
+Error_reporting()  自己百度吧...我他妈的....
+
+------错 误 类 型----
+
+E_PARSE 		编译错误
+E_ERROR		致命错误
+E_WARNING	警告错误
+E_NOTICE		通知错误
+
+用户错误E_USER_ERROR 加上USER即可~ 好像没有E_USER_PARSE
+
+E_ALL 全部错误
+
+
+------i n i 中-------
+
+
+Error_reporting = E_ALL/E_....  只显示什么级别的错误   类型看上面~
+Display_error = of/off 页面中是否显示错误
+log_error = on/off  开启或关闭错误信息文件储存
+error_log = "路径"   错误信息返回的错误内容放在何处  XX.log

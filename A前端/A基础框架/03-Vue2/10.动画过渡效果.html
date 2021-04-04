@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>奇点</title>
+	</head>
+	<style type="text/css">
+		/* 动画的过度*/
+		.move-enter-active{
+			transition: all 0.35s;
+		}
+		.move-leave-active {
+			transition: all 1s;
+		}
+
+		/* 隐藏时的样式 */
+		.move-enter,
+		.move-leave-to {
+			transform: translateX(30px);
+			opacity: 0;
+		}
+
+		/* 显示时的样式 */
+		.move-leave,
+		.move-enter-to {
+		}
+	</style>
+	<script src="./vue.js" type="text/javascript" charset="utf-8"></script>
+	<body>
+		<div id="AppOne">
+			<button @click="switchState=!switchState">切换状态</button>
+			<!-- 做vue的动画必须先使用transition标签 name自定义 -->
+			<transition name="move">
+				<p v-show="switchState">移动后消失</p>
+			</transition>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var vm = new Vue({
+			el: "#AppOne",
+			data: {
+				switchState: true
+			}
+		});
+	</script>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>奇点</title>
+	</head>
+	<script src="./vue.js" type="text/javascript" charset="utf-8"></script>
+	<body>
+		<div id="AppOne">
+			<p>数组的列表渲染</p>
+			<ul>
+				<li v-for="(obj,index) in list" :key="index" :style="{color: index==Objrender?'red':''}">
+					{{index}}---{{obj.name}}---{{obj.age}}---
+					<button type="button" @click="deleteList(index)">删除</button>---
+					<button type="button" @click="updateList(index)">渲染到列表</button>
+				</li>
+			</ul>
+			<button @click="sort">排序{{sortData ? "降" : "升"}}</button>
+			<p>对象的列表渲染</p>
+			<ul>
+				<li v-for="(value,key) in list[Objrender]" :key="key">
+					{{key}}---{{value}}---
+					<button @click="updateObj(key)">修改</button>
+				</li>
+			</ul>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var vm = new Vue({
+			el: "#AppOne",
+			data: {
+				list: [{
+						name: "A",
+						age: 20
+					},
+					{
+						name: "B",
+						age: 25
+					},
+					{
+						name: "C",
+						age: 28
+					},
+					{
+						name: "D",
+						age: 27
+					},
+					{
+						name: "E",
+						age: 23
+					}
+				],
+				sortData: true,
+				Objrender: 0
+			},
+			methods: {
+				sort: function() {
+					this.list = this.list.sort((a, b) => {
+						if (this.sortData) {
+							return a["age"] - b["age"];
+						} else {
+							return b["age"] - a["age"];
+						}
+					});
+					this.sortData = !this.sortData;
+				},
+				deleteList: function(index) {
+					//删除对应下标的 一个值
+					this.list.splice(index, 1)
+				},
+				updateList: function(index) {
+					/* //输入得到需要修改的值
+					const newDataName = prompt(`修改第${index}个数据的名称`, this.list[index].name);
+					const newDataAge = prompt(`修改第${index}个数据的年龄`, this.list[index].age);
+					const newObject = {name: newDataName,age: newDataAge};
+					this.list.splice(index, 1, newObject);
+					//更新调用排序
+					this.sortData = !this.sortData;
+					this.sort(); */
+					this.Objrender = index;
+				},
+				updateObj: function(key) {
+					const newData = prompt(`修改${key}的数据`, this.list[this.Objrender][key]);
+					this.list[this.Objrender][key] = newData;
+				}
+			}
+		});
+	</script>
+</html>

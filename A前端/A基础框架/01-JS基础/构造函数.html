@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			
+			
+/* 			var a = (function XD(){   //自运行函数[(函数)()],同等的[(函数())]
+				console.log("!!");
+			})(); */
+
+
+/* 			function XD() {
+				this.name = "函数对象";
+			}
+			
+			var 对象 = new XD();
+			对象.__proto__.name1 = "原型对象";		//通过对象给函数对象添加原型对象//先添加在使用;
+			var 对象2 = new XD();
+			console.log(对象2.name1); */
+
+
+/* 			function XDA(Obj) {						//通过创建对象给函数传递的形参为对象 然后函数接应该对象；
+				this.name = Obj.name;
+			}
+			var 对象3 = new XDA({
+				name: "形参传递对象"
+			});
+			console.log(对象3.name); */
+			
+			/* function XDB(){
+				this.name = "函数对象";
+			}
+			XDB.prototype.type = "原型对象";			//通过函数添加原型对象;
+			var 对象4 = new XDB();
+			console.log(对象4.name);					//输出为：函数对象
+			对象4.name = "新普通对象";				
+			console.log(对象4.name);					//输出为：新普通对象
+			console.log(对象4.type);					//输出为：原型对象
+			对象4.type = "新普通对象";				//这里并没有覆盖原型对象内容，只是遮住了，用__proto__还可以调用原来在对象内的原型对象；
+			console.log(对象4.type);					//输出为：新普通对象
+			console.log(对象4.__proto__.type); */		//输出为：原型对象
+			
+			
+			// 上面升级的函数↓↓
+			function FnDuiXiang( obj ){ //函数对象			//2.接收传递的对象参数 //这里为终点A
+				this._init( obj );							//3.函数内容为运行init函数 传递进来的obj对象 终点A→起点B
+			}												//4.补充上面  首先是this._init;他会在自身(this)找_init函数,
+															//5.没有这个函数它会找原型对象，于是运行原型对象的_init函数;
+			FnDuiXiang.prototype = {						//6.这条是通过Fn函数给原型对象添加函数或对象//不建议添加对象;
+				_init:function( obj ){						//7.通过5执行该函数,接收刚开始传递的对象起点A→终点A→起点B→终点B(这里为终点B);
+					this.name = "搞死我了这玩意";				//8.这里赋予函数给ShiliObj;原理下面再说..
+					this.type = "传递给FnDuiXiang的值";		//9.这里赋值给构造函数Fn,当Fn执行完毕若无返回值return则将值返回给ShiliObj;
+				},
+				YuanXingFn:function(){						//10.这里是给原型添加函数,公共函数减少内存的使用,不需要给每个对象添加函数(与上面分开)
+					console.log("给原型赋予函数Fn,调用时会执行里面的内容");
+				}
+			}
+			
+			var ShiliObj = new FnDuiXiang({					//1.传递对象给Fn构造函数  为了好理解 这里为起点A
+				name:"修改_init传递的值,但它本身没有变化";
+				tyep:"传递";
+			});
+		</script>
+	</body>
+</html>

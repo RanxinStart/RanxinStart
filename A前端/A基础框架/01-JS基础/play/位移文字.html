@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			* {
+				margin: 0;
+			}
+
+			.W1 {
+				width: 1000px;
+				height: 150px;
+				margin: 80px auto;
+				display: flex;
+				justify-content: space-around;
+			}
+
+			.W2 {
+				width: 1000px;
+				height: 50px;
+				margin: 0 auto;
+				display: flex;
+				justify-content: center;
+			}
+			.W1>div {
+				border: 15px solid #66ccff;
+				outline: 3px solid #000;
+				width: 150px;
+				height: 150px;
+				font-size: 130px;
+				line-height: 150px;
+				text-align: center;
+				user-select: none;
+				overflow: hidden;
+				word-wrap: break-word;
+			}
+
+			.W2>input {
+				border-radius: 15px;
+				outline: none;
+				border-color: #777;
+				border-width: 3px;
+			}
+
+			#A1 {
+				padding: 0 70px 0 15px;
+				width: 300px;
+				font-size: 22px;
+			}
+
+			#A2 {
+				position: relative;
+				left: -50px;
+				width: 50px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="W1">
+			<div>A</div>
+			<div>B</div>
+			<div>C</div>
+			<div>D</div>
+			<div>E</div>
+		</div>
+		<div class="W2">
+			<input type="text" id="A1" placeholder="            输入文字25字以内" />
+			<input type="button" id="A2" value="确定" />
+		</div>
+	</body>
+	<script type="text/javascript">
+		var xianS = document.getElementsByClassName("W1")[0].children;
+		var anNiu1 = document.getElementById("A1");
+		var anNiu2 = document.getElementById("A2");
+		var jiBianZ = Array(5);
+		for (var i = 0; i < xianS.length; i++) {
+			jiBianZ[i] = xianS[i].innerHTML;
+		}
+
+		anNiu1.onkeydown = function(E) {
+			E.keyCode == 13 ? anNiu1.value.length == 0 ? 置换(jiBianZ, "内容为空!") : anNiu1.value.length > 25 ? 置换(jiBianZ,
+				"这么小的框显示不完的喂，别超过25个字呀!") : 置换(jiBianZ, anNiu1.value) : [];
+		}
+
+		anNiu2.onclick = function() {
+			anNiu1.value.length == 0 ? 置换(jiBianZ, "内容为空!") : anNiu1.value.length > 25 ? 置换(jiBianZ, "这么小的框显示不完的喂，别超过25个字呀!") :
+				置换(jiBianZ, anNiu1.value);
+		}
+
+		function 置换(S, Z) {
+
+			for (var i = 1; i < xianS.length; i++) {
+				xianS[i - 1].style.fontSize = xianS[i].style.fontSize;
+				xianS[i - 1].style.lineHeight = xianS[i].style.lineHeight;
+				xianS[i - 1].style.textAlign = xianS[i].style.textAlign;
+			}
+			Z.length > 1 ? 多字状态(xianS[4]) : 少字状态(xianS[4]);
+
+
+			S.shift();
+			S[S.length] = Z;
+
+			for (var i = 0; i < xianS.length; i++) {
+				xianS[i].innerHTML = jiBianZ[i];
+			}
+
+			anNiu1.value = "";
+		}
+
+		function 多字状态(节点) {
+			节点.style.fontSize = "30px";
+			节点.style.lineHeight = "30px";
+			节点.style.textAlign = "left";
+		}
+
+		function 少字状态(节点) {
+			节点.style.fontSize = "130px";
+			节点.style.lineHeight = "150px";
+			节点.style.textAlign = "center";
+		}
+	</script>
+</html>

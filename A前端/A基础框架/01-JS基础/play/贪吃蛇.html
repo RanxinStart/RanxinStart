@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>来一起玩蛇啊!</title>
+		<style type="text/css">
+			*{
+				margin:0;
+				padding: 0;
+				overflow: hidden;
+			}
+		</style>
+	</head>
+	<body style="background-color: black;">
+		<div id="zhuT" style="margin-left: auto;margin-right: auto;">
+		</div> 
+	</body>
+	<script>
+		var chuangKouKuanD = window.innerWidth ;		//获取浏览器宽度
+		var chuangKouGaoD = window.innerHeight ;		//获取浏览器高度
+		var 比例 = Math.ceil(((chuangKouKuanD / chuangKouGaoD) * 10)) / 10 ; //不要在意这个细节！
+		var SS_chuangKouKuanD;						//懒得做了= =
+		var SS_chuangKouGaoD;						//同上 没有用的东西，本来要做实时窗口地图大小的
+		var Y_shuZu = Array();						//请勿更改
+		var X_shuZu = Array();						//请勿更改
+		var 地图块颜色 = "rgb(102,204,255)";			//地图块颜色(请使用rgb!)
+		var 蠢蛇颜色 = "rgb(0, 0, 0)";				//蠢蛇颜色(如果是黑色0 零前面有空格 rgb(0, 0, 0) )
+		var 食物颜色 = "rgb(255, 0, 0)"				//同上 注意三种颜色不能有相同！！！！
+		var shaPanH = 30;							//地图大小 X行
+		var shaPanL = 50;							//地图大小 X列
+		// var shaPanL = shaPanH * 比例;				//地图大小 根据X行自动调整(可能会崩溃，不建议使用)
+		var 地图坐标 = 80000000000;					//请勿更改
+		var 坐标 = 0;								//请勿更改
+		var 消除坐标 = 0;							//请勿更改
+		var 移动速度 = 250;  						// mS
+		var 消除坐标 = Array();						//请勿更改
+		var 蛇延迟 = 0;								//请勿更改
+		var 蛇长度 = 2;								//字面意思
+		var 随机食物 = 0;							//请勿更改
+		var 食物量 = 2;								//吃一次加多少
+		
+		var zhuT = document.getElementById("zhuT");
+		zhuT.style.width = (chuangKouGaoD / shaPanH) * shaPanL + "px";
+		
+		
+		//生成地图↓
+		for(i=0;i<shaPanH;i++){	//行
+			地图坐标 += 100000;
+			for(I=0;I<shaPanL;I++){ //列
+				地图坐标 += 1;
+				X_shuZu[I] = document.createElement("div");
+				X_shuZu[I].style.height = chuangKouGaoD / shaPanH + "px";
+				X_shuZu[I].style.width = chuangKouGaoD / shaPanH + "px";
+				X_shuZu[I].style.backgroundColor = 地图块颜色;
+				X_shuZu[I].style.float = "left";
+				X_shuZu[I].id = "zuoBiao" + 地图坐标;
+				zhuT.appendChild(X_shuZu[I]);
+			}
+			地图坐标 -= shaPanL;
+			Y_shuZu[i] = X_shuZu;
+		}//生成地图↑
+		
+		function 随机食物(){
+			
+		}
+		function 初始位置(){
+			坐标 = (80000000000 + (100000 * parseInt(shaPanH / 2))+(1 * parseInt(shaPanL / 2)));
+			document.getElementById("zuoBiao" + 坐标).style.backgroundColor = 蠢蛇颜色;
+			随机食物 = (80000000000 + (100000 * Math.ceil(Math.random() * (shaPanH - 0.5)))) + ( 1 * Math.ceil(Math.random() * (shaPanL - 0.5)));
+			console.log(随机食物);
+			if(坐标 == 随机食物){初始位置();}
+			document.getElementById("zuoBiao" + 随机食物).style.backgroundColor = 食物颜色;
+		}
+		
+		function 尾巴消除(延迟后的坐标){
+			document.getElementById("zuoBiao" + 延迟后的坐标).style.backgroundColor = 地图块颜色 ; //尾巴消除
+		}
+		
+		function 游戏结束以及食物检测(){
+			if(document.getElementById("zuoBiao" + 坐标).style.backgroundColor == 食物颜色 || document.getElementById("zuoBiao" + 随机食物).style.backgroundColor != 食物颜色){
+				蛇长度 += 食物量;
+				while(true){
+				随机食物 = (80000000000 + (100000 * Math.ceil(Math.random() * (shaPanH - 0.5)))) + ( 1 * Math.ceil(Math.random() * (shaPanL - 0.5)));
+				if(document.getElementById("zuoBiao" + 随机食物).style.backgroundColor != 蠢蛇颜色){break;}
+				}
+				document.getElementById("zuoBiao" + 随机食物).style.backgroundColor = 食物颜色;
+			}
+			if(document.getElementById("zuoBiao" + 坐标).style.backgroundColor == 蠢蛇颜色){
+				alert("游戏结束~!");
+				window.location.reload(true);
+			}
+			
+		}
+		function 右移动(){
+			if(单个按键 != 39){return;}
+			消除坐标[消除坐标.length] = 坐标;
+			坐标 += 1;
+			//------------------
+			var 判定边距 = 坐标 + "";
+			var 判定边距结果 = 判定边距 - (判定边距[6] + 判定边距[7] + 判定边距[8] + 判定边距[9] + 判定边距[10]);
+			判定边距结果 += shaPanL + 1;
+			if(坐标==判定边距结果){坐标 = 判定边距结果 - shaPanL}
+			//------------------
+			游戏结束以及食物检测();
+			document.getElementById("zuoBiao" + 坐标).style.backgroundColor = 蠢蛇颜色;
+			//------------------
+			蛇延迟 += 1;
+			if(蛇延迟 == 蛇长度){
+				尾巴消除(消除坐标[消除坐标.length - 蛇长度]);
+				蛇延迟 -= 1;}
+			//------------------
+			setTimeout(function (){右移动();},移动速度);
+		}
+		
+		function 左移动(){
+			if(单个按键 != 37){return;}
+			消除坐标[消除坐标.length] = 坐标;
+			坐标 -= 1;
+			//------------------
+			var 判定边距 = 坐标 + "";
+			var 判定边距结果 = 判定边距 - (判定边距[6] + 判定边距[7] + 判定边距[8] + 判定边距[9] + 判定边距[10]);
+			if(坐标==判定边距结果){坐标 = 判定边距结果 + shaPanL}
+			//------------------
+			游戏结束以及食物检测();
+			document.getElementById("zuoBiao" + 坐标).style.backgroundColor = 蠢蛇颜色;
+			//------------------
+			蛇延迟 += 1;
+			if(蛇延迟 == 蛇长度){
+				尾巴消除(消除坐标[消除坐标.length - 蛇长度]);
+				蛇延迟 -= 1;}
+			//------------------
+			setTimeout(function (){左移动();},移动速度);
+		}
+		function 上移动(){
+			if(单个按键 != 38){return;}
+			消除坐标[消除坐标.length] = 坐标;
+			坐标 -= 100000;
+			//------------------
+			var 判定边距 = 坐标 + "";
+			var 判定边距结果 = 判定边距 - ((判定边距[1] + 判定边距[2] + 判定边距[3] + 判定边距[4] + 判定边距[5])*100000);
+			if(坐标==判定边距结果){坐标 = 判定边距结果 + (shaPanH * 100000)}
+			//------------------
+			游戏结束以及食物检测();
+			document.getElementById("zuoBiao" + 坐标).style.backgroundColor = 蠢蛇颜色;
+			//------------------
+			蛇延迟 += 1;
+			if(蛇延迟 == 蛇长度){
+				尾巴消除(消除坐标[消除坐标.length - 蛇长度]);
+				蛇延迟 -= 1;}
+			//------------------
+			setTimeout(function (){上移动();},移动速度);
+		}
+		function 下移动(){
+			if(单个按键 != 40){return;}
+			消除坐标[消除坐标.length] = 坐标;
+			坐标 += 100000;
+			//------------------
+			var 判定边距 = 坐标 + "";
+			var 判定边距结果 = 判定边距 - ((判定边距[1] + 判定边距[2] + 判定边距[3] + 判定边距[4] + 判定边距[5])*100000);
+			判定边距结果 += (shaPanH * 100000) + 100000;
+			if(坐标==判定边距结果){坐标 = 判定边距结果 - (shaPanH * 100000)}
+			//------------------
+			游戏结束以及食物检测();
+			document.getElementById("zuoBiao" + 坐标).style.backgroundColor = 蠢蛇颜色;
+			//------------------
+			蛇延迟 += 1;
+			if(蛇延迟 == 蛇长度){
+				尾巴消除(消除坐标[消除坐标.length - 蛇长度]);
+				蛇延迟 -= 1;}
+			//------------------
+			setTimeout(function (){下移动();},移动速度);
+		}
+		var 方向判定 = 0;
+		var 单个按键 = 0;
+		window.onkeydown = function (anJian) {
+			if(方向判定 != anJian.keyCode && 方向判定 != (anJian.keyCode + 2) && 方向判定 != (anJian.keyCode - 2) ){  //单次判定
+			
+			
+				if(anJian.keyCode == 37 || anJian.keyCode == 38 || anJian.keyCode == 39 || anJian.keyCode == 40 || anJian.keyCode == 32){
+					单个按键 = anJian.keyCode; 
+					方向判定 = anJian.keyCode;
+				}
+				if(anJian.keyCode == 37){
+		　　　　　　左移动();
+		　　　　}
+				if(anJian.keyCode == 38){
+		　　　　　　上移动(); 
+		　　　　}
+				if(anJian.keyCode == 39){
+		　　　　　　右移动();
+		　　　　}
+				if(anJian.keyCode == 40){
+		　　　　　　下移动();
+		　　　　}
+		
+		}
+			}
+		
+		初始位置();
+	</script>
+</html>

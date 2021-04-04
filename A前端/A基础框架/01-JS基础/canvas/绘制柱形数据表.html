@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			canvas {
+				margin: 100px 0 0 100px;
+				/* outline: 2px solid #6cf; */
+			}
+		</style>
+	</head>
+	<body style="background-color: #CCC;">
+		<!-- 不要用CSS调整大小 -->
+		<canvas id="MyCanvas" width="500px" height="500px">
+			<!-- 浏览器不支持canvas时会把它当作div，显示里面的内容！ -->
+		</canvas>
+		<script type="text/javascript">
+			var MyCanvas = document.getElementById("MyCanvas");
+			var MyCanvas$ = MyCanvas.getContext("2d");
+			var MyData = [{
+					"比例": 40,
+					"颜色": "red",
+					"内容": "QAQ"
+				}, {
+					"比例": 1,
+					"颜色": "#6cf",
+					"内容": "QAQ"
+				},
+				{
+					"比例": 25,
+					"颜色": "#cf6",
+					"内容": "QAQ"
+				},
+				{
+					"比例": 10,
+					"颜色": "#000",
+					"内容": "QAQ"
+				},
+				{
+					"比例": 24,
+					"颜色": "#154",
+					"内容": "QAQ"
+				}
+			];
+			
+
+				function MyRad(deg){
+					return deg * Math.PI / 180;
+				}
+				var Jiao = MyRad(-90);
+			for (var i = 0; i < MyData.length; i++){
+				MyCanvas$.beginPath();
+				MyCanvas$.moveTo(MyCanvas.width / 2,MyCanvas.height / 2);
+				MyCanvas$.arc(MyCanvas.width / 2,MyCanvas.height / 2, MyCanvas.width / 2 ,Jiao,Jiao + MyRad((MyData[i]["比例"] / 100) * 360));
+				MyCanvas$.closePath();
+				MyCanvas$.fillStyle = MyData[i]["颜色"];
+				MyCanvas$.fill();
+				Jiao = Jiao + MyRad((MyData[i]["比例"] / 100) * 360);
+			}
+		</script>
+	</body>
+</html>

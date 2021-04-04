@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			Promise1()
+				.then((data) => {
+					return Promise2(data);
+				})
+				.then((data) => {
+					return Promise3(data);
+				})
+				.then((data) => {
+					return Promise4(data);
+				})
+				.then((data) => {
+					return Promise5(data);
+				})
+				.catch( /*提示错误信息*/ );
+
+			async function request() {
+				try {
+					const Adata = await Promise1();
+					const Bdata = await Promise2(Adata);
+					const Cdata = await Promise3(Bdata);
+					const Ddata = await Promise2(Cdata);
+					console.log("最终结果为:" + Ddata);
+				} catch (error) {
+					//提示错误信息
+				}
+			}
+		</script>
+	</body>
+</html>

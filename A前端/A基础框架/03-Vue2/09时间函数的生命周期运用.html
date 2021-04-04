@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>奇点</title>
+	</head>
+	<style type="text/css">
+		p {
+			background-color: #6cf7;
+		}
+
+		div.times {
+			color: #f00;
+		}
+	</style>
+	<script src="./vue.js" type="text/javascript" charset="utf-8"></script>
+	<body>
+		<div id="AppOne">
+			<p>生命函数开启关闭计时器</p>
+			<button type="button" @click="destroyDiv">删除这个实例对象</button>
+			<div class="times" v-show="divState">我来了~我来了~我来了~</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var vm = new Vue({
+			el: "#AppOne",
+			data: {
+				time: "",
+				divState: false
+			},
+			methods: {
+				destroyDiv: function() {
+					this.$destroy();
+				}
+			},
+			mounted() { 
+				//第一次渲染结束触发
+				this.intervalID1 = setInterval(() => {
+					this.divState = !this.divState;
+					console.log("计时器还在执行>目前状态:" + this.divState);
+				}, 600);
+			},
+			destroyed() {
+				//删除这个实例之后触发
+				clearInterval(this.intervalID1);
+			}
+		});
+	</script>
+</html>

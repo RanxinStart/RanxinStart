@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>奇点</title>
+	</head>
+	<script src="./vue.js" type="text/javascript" charset="utf-8"></script>
+	<body>
+		<div id="AppOne">
+			<p>{{ "全局过滤器" | A过滤器(5) }}</p>
+			<p>{{ "局部过滤器" | B过滤器(5) }}</p>
+		</div>
+	</body>
+	<script type="text/javascript">
+		Vue.filter('A过滤器', function(a, b) {
+			return `第一个参数为:${a},第二个参数为:${b}`;
+		})
+
+		var vm = new Vue({
+			el: "#AppOne",
+			filters: {
+				'B过滤器': function(a, b) {
+					return `第一个参数为:${a},第二个参数为:${b}`;
+				}
+			}
+		});
+	</script>
+</html>

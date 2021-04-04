@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>奇点</title>
+	</head>
+	<script src="./vue.js" type="text/javascript" charset="utf-8"></script>
+	<style type="text/css">
+		input {}
+	</style>
+	<body>
+		<div id="AppOne">
+			A值<input type="text" v-model="Ainput"><br>
+			B值<input type="text" v-model="Binput"><br>
+			A B值(单向)<input type="text" v-model="input1"><br>
+			A B值(单向)<input type="text" v-model="input2"><br>
+			A B值(双向)<input type="text" v-model="input3">
+		</div>
+	</body>
+	<script type="text/javascript">
+		const vm = new Vue({
+			el: "#AppOne",
+			data: {
+				Ainput: "A",
+				Binput: "B",
+				input2: "A B",
+			},
+			computed: { //高级的data
+				input1: function() {
+					return this.Ainput + " " + this.Binput;
+				},
+				/* input1:{ //同上 两一种方法
+					get(){
+						return this.Ainput + " " +  this.Binput;
+					}
+				} */
+				//input3双向写法
+				input3: {
+					get() { //读数据时执行
+						return this.Ainput + " " +  this.Binput;
+					},
+					set(value) { // 写数据时执行
+						//先将写入的数据value拆分
+						const v = value.split(" ");
+						this.Ainput = v[0];
+						this.Binput = v[1] ? v[1] : "";
+					}
+				}
+			},
+			watch: { //监视数据 ##有外部写法 
+				Ainput: function(NewData, OldData) {
+					this.input2 = NewData + " " + this.Binput;
+				},
+				/* Binput:function(NewData,OldData){ //使用外部写法试试
+					this.input2 = this.Ainput + " " + NewData;
+				} */
+
+			}
+		});
+
+		vm.$watch("Binput", function(NewData, OldData) { //监视外部写法 用箭头函数会不执行
+			this.input2 = this.Ainput + " " + NewData;
+		});
+	</script>
+</html>

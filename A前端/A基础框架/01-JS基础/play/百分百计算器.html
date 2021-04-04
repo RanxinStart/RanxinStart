@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>百分百计算器</title>
+		<style type="text/css">
+			input {
+				width: 75px;
+				height: 25px;
+				font-size: 23px;
+				text-align: center;
+				line-height: 25px;
+			}
+
+			#C {
+				padding: auto 0;
+			}
+
+			span {
+				font-size: 25px;
+			}
+		</style>
+	</head>
+	<body>
+		<input type="text" id="A" value="" placeholder="固定值" />
+		<span>的</span>
+		<input type="text" id="B" value="" placeholder="浮动值" />
+		<span>是</span>
+		<input type="text" id="C" value="" placeholder="百分几" />
+		<span>%</span>
+		<br />
+		<input type="text" id="D" value="" placeholder="固定值" />
+		<span>的</span>
+		<input type="text" id="E" value="" placeholder="浮动值" />
+		<span>是</span>
+		<input type="text" id="F" value="" placeholder="百分几" />
+		<span>%</span>
+	</body>
+	<script type="text/javascript">
+		var ID = id => document.getElementById(id);
+
+		ID("A").onkeyup = ID("B").onkeyup = () => {
+			var a = ID("A").value.replace(/\s/g, "");
+			var b = ID("B").value.replace(/\s/g, "");
+			ID("A").value = a;
+			ID("B").value = b;
+			a && (ID("A").style.width = a.length * 15 + 20 + "px");
+			b && (ID("B").style.width = b.length * 15 + 20 + "px");
+
+			if (a > 0 && b > 0) {
+				var ret = Math.round((b * (100 / a)) * 100) / 100 + "";
+				ID("C").style.width = (ret.length - (ret.indexOf(".", 0) > 0 ? 1 : 0)) * 15 + "px";
+				ID("C").value = ret;
+			}
+		}
+
+		ID("D").onkeyup = ID("E").onkeyup = () => {
+			var a = ID("D").value.replace(/\s/g, "");
+			var b = ID("E").value.replace(/\s/g, "");
+			ID("D").value = a;
+			ID("E").value = b;
+			a && (ID("D").style.width = a.length * 15 + 20 + "px");
+			b && (ID("E").style.width = b.length * 15 + 20 + "px");
+
+			if (a > 0 && b > 0) {
+				var ret = Math.round((b * (100 / a)) * 100) / 100 + "";
+				ID("F").style.width = (ret.length - (ret.indexOf(".", 0) > 0 ? 1 : 0)) * 15 + "px";
+				ID("F").value = ret;
+			}
+		}
+	</script>
+</html>

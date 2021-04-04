@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>奇点</title>
+	</head>
+	<script src="./vue.js" type="text/javascript" charset="utf-8"></script>
+	<body>
+		<div id="AppOne">
+			<p>普通的事件插件</p>
+			<button @click="but1">不传值</button>
+			<button @click="but2($event)">传值A</button>
+			<hr>
+			<p>阻止冒泡事件</p>
+			<div style="width: 300px;height: 300px;background-color: #122B40;" @click="but3">
+				<div style="width: 150px;height: 150px;background-color: #a44;" @click.stop="but4"></div>
+			</div>
+			<hr>
+			<p>阻止默认事件</p>
+			<a href="http://www.baidu.com" @click.prevent="but5">跳转到百度</a>
+			<hr>
+			<p>指定按键事件</p>
+			<input type="text" @keyup.13="but6" />
+		</div>
+	</body>
+	<script type="text/javascript">
+		var vm = new Vue({
+			el: "#AppOne",
+			data: {
+
+			},
+			methods: {
+				but1: function() {
+					alert("event默认为自身标签>>>>" + event.target.innerText);
+				},
+				but2: function(e) {
+					//若不定义event值 那么..就可以不定义 默认会传入特殊值( $event
+					alert(e.target.innerText);
+				},
+				but3: function() {
+					alert("blue");
+				},
+				but4: function() {
+					//默认事件是会冒泡的 在插值添加 .stop即可不冒泡
+					alert("Red");
+				},
+				but5: function() {
+					//默认事件是会跳转的 在插值添加 .prevent即可不触发默认事件
+					alert("阻止了默认事件");
+				},
+				but6:function(){
+					//在插值添加 .keyCode 只有按到指定的keyCode键才会触发事件
+					alert("你点击了回车键" + event.keyCode);
+				}
+			}
+		});
+	</script>
+</html>

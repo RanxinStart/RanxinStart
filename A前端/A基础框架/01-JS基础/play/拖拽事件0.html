@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			* {
+				margin: 0;
+			user-select: none;
+			}
+		</style>
+		<script>
+			window.onload = function() {
+				var QAQ = true;
+				while (QAQ) {
+					var 块数量 = prompt("请输入你要的方块总数量", "数字1~999");
+					块数量 >= 1 ? 块数量 <= 999 ? QAQ = false : [] : [];
+				}
+				
+				for (i = 0; i < 块数量 - 1; i++) {
+					document.getElementsByTagName("body")[0].appendChild(document.getElementsByTagName("div")[0].cloneNode(true));
+				}
+				for (i = 0; i < document.getElementsByTagName("div").length; i++) {
+					var A = Math.floor(Math.random() * 255);
+					var B = Math.floor(Math.random() * 255);
+					var C = Math.floor(Math.random() * 255);
+					var D = Math.floor(Math.random() * window.innerHeight);
+					var E = Math.floor(Math.random() * window.innerWidth);
+					var F = Math.random() * 50;
+					document.getElementsByTagName("div")[i].style.backgroundColor = "rgb(" + A + "," + B + "," + C + ")";
+					document.getElementsByTagName("div")[i].style.borderRadius = "50%";
+					document.getElementsByTagName("div")[i].style.opacity = "0.6";
+					document.getElementsByTagName("div")[i].style.top = D + "px";
+					document.getElementsByTagName("div")[i].style.left = E + "px";
+					document.getElementsByTagName("div")[i].style.height = document.getElementsByTagName("div")[i].style.width = F +
+						"px";
+					移动(document.getElementsByTagName("div")[i]);
+				}
+
+				function 移动(节点) {
+					节点.onmousedown = function(E) {
+						E = E || window.E;
+						AAX = E.clientX - 节点.offsetLeft;
+						AAY = E.clientY - 节点.offsetTop;
+						document.onmousemove = function(E) {
+							节点.style.left = E.clientX - AAX + "px";
+							节点.style.top = E.clientY - AAY + "px";
+						}
+						节点.onmouseup = function() {
+							document.onmousemove = false;
+						}
+					}
+				}
+			}
+		</script>
+	</head>
+	<body style="background-color: black;overflow: hidden;">
+		<div style="position: absolute;opacity: 0.6;border-radius: 0%;">
+		</div>
+	</body>
+</html>

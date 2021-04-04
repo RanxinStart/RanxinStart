@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style type="text/css">
+			* {
+				margin: 0;
+			}
+
+			canvas {
+				/* background-color: #ea66a6; */
+				display: block;
+			}
+
+			body {
+				background-image: url(../图片image/60141148_p0.png);
+				background-size: 100% auto;
+				background-position: center;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="Canvas">
+			你的浏览器版本过低，请先升级你的浏览器！
+		</canvas>
+		<script type="text/javascript">
+			//		面对对象		//
+			function generatingSnowflakes(obj) {
+				this._Init(obj);
+			}
+			generatingSnowflakes.prototype = {
+				_Init: function(obj) {
+					this.snowflakeSize = obj.snowflakeSize || 1;
+					this.positionX = obj.positionX || 0;
+					this.positionY = obj.positionY || 0;
+					this.fallingSpeed = obj.fallingSpeed == 0 ? 0 : obj.fallingSpeed || 2;
+					this.floatingSpeed = obj.floatingSpeed == 0 ? 0 : obj.floatingSpeed || 0.5;
+					this.spinningSpeed = obj.spinningSpeed || 1;
+					this.rotationAngle = obj.rotationAngle < 0.5 ? (-1) : 1;
+					this.rotate = obj.rotate == false ? false : true;
+					this._red = 0;
+				},
+				createSnowflake: function(cvs, MyImg, obj) {
+					cvs.save();
+					cvs.translate(this.positionX, this.positionY);
+					obj.rotate ? cvs.rotate((obj._red += (Math.random() * this.rotationAngle) * this.spinningSpeed) * Math.PI / 180) :
+						[];
+					cvs.drawImage(MyImg,
+						-((this.snowflakeSize * MyImg.width) / 2),
+						-((this.snowflakeSize * MyImg.height) / 2),
+						this.snowflakeSize * MyImg.width,
+						this.snowflakeSize * MyImg.height);
+					cvs.restore();
+				},
+				_fall: function(obj) {
+					obj.positionY += obj.fallingSpeed;
+					if (obj.positionY > browserH + obj.snowflakeSize * MyImg.height / 2) {
+						obj.positionY = -(obj.snowflakeSize * MyImg.height / 2);
+					}
+					if (obj.positionY < -(obj.snowflakeSize * MyImg.height / 2)) {
+						obj.positionY = browserH + obj.snowflakeSize * MyImg.height / 2;
+					}
+				},
+				_floatingLeftAndRight: function(obj) {
+					obj.positionX += obj.floatingSpeed;
+					if (obj.positionX > browserW + obj.snowflakeSize * MyImg.width / 2) {
+						obj.positionX = -(obj.snowflakeSize * MyImg.width / 2);
+					}
+					if (obj.positionX < -(obj.snowflakeSize * MyImg.width / 2)) {
+						obj.positionX = browserW + obj.snowflakeSize * MyImg.width / 2;
+					}
+				},
+				built_inTimer: function(fps, ka, obj, fn) {
+					var Nac = 0;
+					setInterval(function() {
+						Nac++;
+						if (Nac > fps / ka) {
+							Nac = 0;
+							fn(obj);
+						}
+					}, 1000 / fps);
+				}
+			}
+
+			function setRandom(min, max) {
+				return min + (Math.random() * (max - min));
+			}
+		</script>
+		<script type="text/javascript">
+			function $(id) {
+				return document.getElementById(id);
+			}
+			var browserW = window.innerWidth;
+			var browserH = window.innerHeight;
+			var _cvs = document.createElement("canvas");
+			var _cvs$ = _cvs.getContext("2d");
+			var canvas = $("Canvas");
+			var canvas$ = canvas.getContext("2d");
+			canvas.width = _cvs.width = browserW;
+			canvas.height = _cvs.height = browserH;
+
+			window.onresize = function() {
+				browserW = window.innerWidth;
+				browserH = window.innerHeight;
+				canvas.width = _cvs.width = browserW;
+				canvas.height = _cvs.height = browserH;
+			}
+
+			var snowflakes = new Array();
+
+			var MyImg = new Image;
+			MyImg.src = "./img/雪花.png";
+
+			MyImg.onload = function() {
+				generatingSnowflakes.prototype.built_inTimer(144, 144, null, XianS);
+				for (i = 0; i < 250; i++) {
+					snowflakes[i] = new generatingSnowflakes({
+						/* snowflakeSize，positionX，positionY
+						fallingSpeed，floatingSpeed，spinningSpeed，rotationAngle，rotate*/
+
+						/* 大小，位置X，位置Y
+						下落速度，漂泊速度，旋转速度，旋转角度，旋转*/
+
+
+						positionX: (Math.random() * browserW),
+						positionY: (Math.random() * browserH),
+						fallingSpeed: setRandom(0.5, 1.5),
+						floatingSpeed: setRandom(-0.5, 1.5),
+						rotate: true,
+						rotationAngle: Math.random(),
+						spinningSpeed: setRandom(0.6, 1.2),
+						snowflakeSize: setRandom(0.4, 0.8) / 10
+					});
+				}
+
+				function XianS() {
+					_cvs$.clearRect(0, 0, canvas.width, canvas.height);
+					canvas$.clearRect(0, 0, canvas.width, canvas.height);
+					for (i = 0; i < 250; i++) {
+						snowflakes[i]._fall(snowflakes[i]);
+						snowflakes[i]._floatingLeftAndRight(snowflakes[i]);
+						snowflakes[i].createSnowflake(_cvs$, MyImg, snowflakes[i]);
+					}
+					canvas$.drawImage(_cvs, 0, 0); //呈现
+				}
+			}
+		</script>
+	</body>
+</html>

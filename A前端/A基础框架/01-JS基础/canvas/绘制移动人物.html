@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			canvas{
+				margin: 100px 0 0 100px;
+				outline: 2px solid #6cf;
+			}
+		</style>
+	</head>
+	<body style="background-color: #CCC;overflow: hidden;">
+		<!-- 不要用CSS调整大小 -->
+		<canvas id="MyCanvas" width="500px" height="500px">
+			<!-- 浏览器不支持canvas时会把它当作div，显示里面的内容！ -->
+		</canvas>
+		
+		<script type="text/javascript">
+			var MyCanvas = document.getElementById("MyCanvas");
+			var MyCanvas$ = MyCanvas.getContext("2d");				
+
+				var 图片对象 = new Image;
+				图片对象.src = "../素材/像素人物行走0.png";
+				
+				图片对象.onload = function(){
+					图片对象.onload = false;
+					var 帧 = 0;
+					var 高频 = 0;
+					var 帧数 = 120;
+					var 动作 = 0;
+					var 移动速度 = 5;
+					var 横向图片数量 = 3;
+					var 竖向图片数量 = 4;
+					var 放大倍率 = 1.5;
+					var 位置X = 0;
+					var 位置Y = 0;
+					var 裁剪图片大小X = (图片对象.width / 横向图片数量);
+					var 裁剪图片大小Y = (图片对象.height / 竖向图片数量);
+					var 当前图片裁剪点X = 裁剪图片大小X * 帧;
+					var 当前图片裁剪点Y =	裁剪图片大小Y * 动作;
+					var 计时器 = setInterval(function(){
+						高频++;
+						if(高频>=((1000 / (1000 / 帧数)) * (1 / 移动速度))){
+							当前图片裁剪点X = 裁剪图片大小X * 帧;
+							当前图片裁剪点Y =	裁剪图片大小Y * 动作;
+							帧 >= 2 ? 帧 = 0 : 帧++;
+							高频 = 0;
+						}
+						var 图片放置位置X = ((MyCanvas.width / 2) - ((裁剪图片大小X * 放大倍率 / 2))) + 位置X;
+						var 图片放置位置Y = ((MyCanvas.height / 2) - ((裁剪图片大小Y * 放大倍率 / 2))) + 位置Y;
+						// MyCanvas$.clearRect(图片放置位置X,图片放置位置Y,裁剪图片大小X * 放大倍率 ,裁剪图片大小Y * 放大倍率 );
+						MyCanvas$.clearRect(0,0,MyCanvas.width,MyCanvas.height);
+						MyCanvas$.drawImage(图片对象,当前图片裁剪点X,当前图片裁剪点Y,裁剪图片大小X,裁剪图片大小Y,图片放置位置X,图片放置位置Y,裁剪图片大小X * 放大倍率 ,裁剪图片大小Y * 放大倍率 );
+						MyCanvas$.textBaseline = "top";
+						MyCanvas$.textAlign = "left";
+						MyCanvas$.font = "15px 微软雅黑";
+						MyCanvas$.fillText("角色编号" + 图片对象.src[图片对象.src.length-5],5,5);
+						MyCanvas$.fillText("移动速度" + 移动速度,5,20);
+						
+						
+					},1000 / 帧数);
+					
+					document.onkeydown = function(E){
+						E.keyCode == 37 ? 动作 = 1 :[];E.keyCode == 37 ? 位置X += -移动速度 :[];
+						E.keyCode == 38 ? 动作 = 3 :[];E.keyCode == 38 ? 位置Y += -移动速度 :[];
+						E.keyCode == 39 ? 动作 = 2 :[];E.keyCode == 39 ? 位置X += 移动速度 :[];
+						E.keyCode == 40 ? 动作 = 0 :[];E.keyCode == 40 ? 位置Y += 移动速度 :[];
+						E.keyCode == 107 ? 移动速度 += 1 :[];E.keyCode == 109 ? 移动速度 -= 1 :[];
+						for(var i=0;i<6;i++){
+							E.keyCode == (96 + i) ? 图片对象.src = "../素材/像素人物行走" + i + ".png" :[];
+						}
+					}
+				}
+				
+			
+		</script>
+	</body>
+</html>

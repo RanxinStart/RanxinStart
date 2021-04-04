@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>奇点</title>
+	</head>
+	<script src="./vue.js" type="text/javascript" charset="utf-8"></script>
+	<body>
+		<div id="AppOne">
+			名字搜索<input v-model="searchName">
+			<ul>
+				<li v-for="(obj,index) in renderList" :key="index">
+					{{index}}---{{obj.name}}---{{obj.age}}
+				</li>
+			</ul>
+			<button @click="orderType=1">列表升序</button>
+			<button @click="orderType=2">列表降序</button>
+			<button @click="orderType=0">原本排序</button>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var vm = new Vue({
+			el: "#AppOne",
+			data: {
+				list: [{
+						name: "acfun",
+						age: 20
+					},
+					{
+						name: "bilibili",
+						age: 25
+					},
+					{
+						name: "acgtv",
+						age: 28
+					},
+					{
+						name: "baidu",
+						age: 27
+					},
+					{
+						name: "apex",
+						age: 23
+					}
+				],
+				searchName: "",
+				orderType: 0, //0不排序 1 升 2 降
+			},
+			computed: {
+				renderList: function() {
+					//搜索过滤
+					const {
+						list,
+						searchName,
+						orderType
+					} = this;
+					let newList = list.filter((value) => {
+						return value["name"].indexOf(searchName) != "-1";
+					});
+
+					if (orderType != 0) { //等于0不排序 直接跳过
+						newList = newList.sort((a, b) => {
+							if (orderType == 1) {
+								return a.age - b.age;
+							} else {
+								return b.age - a.age;
+							}
+						});
+					}
+
+					return newList;
+				}
+			},
+			beforeCreate() {
+				console.log(arguments.callee.toString().split(/\{/)[0]);
+				console.log(this.list);
+			},
+			beforeDestroy() { //销毁之前
+				console.log(arguments.callee.toString().split(/\{/)[0]);
+			},
+			beforeMount() {
+				console.log(arguments.callee.toString().split(/\{/)[0]);
+				console.log(this.list);
+			},
+			beforeRouteEnter() {
+				console.log(arguments.callee.toString().split(/\{/)[0]);
+			},
+			beforeRouteLeave() {
+				console.log(arguments.callee.toString().split(/\{/)[0]);
+			},
+			beforeRouteUpdate() {
+				console.log(arguments.callee.toString().split(/\{/)[0]);
+			},
+			beforeUpdate(){
+				console.log(arguments.callee.toString().split(/\{/)[0]);
+			}
+
+		});
+	</script>
+</html>

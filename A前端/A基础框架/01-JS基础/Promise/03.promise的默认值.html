@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			new Promise((resolve, reject) => {
+					// resolve("传递成功信息");
+					reject("提示错误信息");
+				}).then(
+					//成功不写	默认值1 => { return 默认值1}
+					//成功不写	默认值2 => Promise.resolve(默认值2)
+
+					//失败不写 	默认值1 => { throw 默认值1 } 
+					//失败不写 	默认值2 => Promise.reject(默认值2)
+				).then( //↓↓↓↓这个就是.catch的实际值
+					value => {
+						console.log("默认值传递的内容为:  " + value);
+					},
+					reason => {
+						console.log("默认值传递的内容为:  " + reason);
+						return Promise.reject("一错再错触发catch");
+					}
+				).catch((reason) => { //这是catch处理 其实就是下面.then一致
+					console.log(reason);
+					// throw reason;
+					return new Promise(() => {});
+					//返回了一个 状态为panding的Promise会中断往下执行
+				})
+				.then(undefined,
+					reason => {
+						console.log("和上面效果一致");
+						console.log("传递的内容为:  " + reason);
+					})
+		</script>
+	</body>
+</html>

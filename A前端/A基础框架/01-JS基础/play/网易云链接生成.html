@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>网易云MP3生成</title>
+		<style type="text/css">
+			* {
+				padding: 0;
+				margin: 0;
+			}
+
+			input {
+				height: 25px;
+				width: 800px;
+				font-size: 25px;
+			}
+		</style>
+	</head>
+	<body>
+		网易云链接:<input type="text" id="C" value="" placeholder="网易云链接" />
+		<br />
+		<br />
+		生成的链接:<input type="text" id="L" value="" placeholder="生成的链接" />
+		<a href="#" target="_blank" id="SS" style="font-size: 25px;">点击试听</a>
+	</body>
+	<script type="text/javascript">
+		var C = document.getElementById("C");
+		var L = document.getElementById("L");
+
+		C.onkeyup = () => {
+			var cv = C.value.replace(/https:\/\/music.163.com\/#\/song\?/, "");
+			var cv = cv.replace(/\s/g, "")
+			if (C.value.indexOf('https://music.163.com/#/song', 0) >= 0) {
+				L.value = "http://music.163.com/song/media/outer/url?" + cv + ".mp3";
+				document.getElementById("SS").href = L.value;
+			} else {
+				L.value = "无法解析此地址";
+			}
+		}
+	</script>
+</html>

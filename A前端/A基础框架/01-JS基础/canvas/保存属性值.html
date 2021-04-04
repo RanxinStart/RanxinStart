@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			canvas{
+				margin: 100px 0 0 100px;
+				outline: 2px solid #6cf;
+			}
+		</style>
+	</head>
+	<body style="background-color: #CCC;">
+		<!-- 不要用CSS调整大小 -->
+		<canvas id="MyCanvas" width="500px" height="500px">
+			<!-- 浏览器不支持canvas时会把它当作div，显示里面的内容！ -->
+		</canvas>
+		<script type="text/javascript">
+			var MyCanvas = document.getElementById("MyCanvas");
+			var MyCanvas$ = MyCanvas.getContext("2d");				
+/* 
+			MyCanvas$.arc(50,250,50,0,360*Math.PI/180);
+			MyCanvas$.globalAlpha = "0.8";
+			MyCanvas$.fillStyle = "#6cf";
+			MyCanvas$.fill();
+			MyCanvas$.save();  //仅限保存了透明的,旋转,缩放,位移.
+			
+			MyCanvas$.beginPath();
+			MyCanvas$.globalAlpha = "0.1";
+			MyCanvas$.arc(150,250,50,0,360*Math.PI/180);
+			MyCanvas$.fillStyle = "#6cf";
+			MyCanvas$.fill();
+			MyCanvas$.save();
+			
+			MyCanvas$.beginPath();
+			MyCanvas$.restore();   //释放
+			MyCanvas$.arc(250,250,50,0,360*Math.PI/180);
+			MyCanvas$.fillStyle = "#6cf";
+			MyCanvas$.fill(); */
+
+			
+			
+		</script>
+	</body>
+</html>

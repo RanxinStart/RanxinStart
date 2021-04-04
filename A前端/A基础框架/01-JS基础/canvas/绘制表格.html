@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			canvas {
+				margin: 100px 0 0 100px;
+				/* outline: 2px solid #6cf; */
+			}
+		</style>
+	</head>
+	<body style="background-color: #CCC;">
+		<!-- 不要用CSS调整大小 -->
+		<canvas id="MyCanvas" width="500px" height="500px">
+			<!-- 浏览器不支持canvas时会把它当作div，显示里面的内容！ -->
+		</canvas>
+		<script type="text/javascript">
+			var MyCanvas = document.getElementById("MyCanvas");
+			var MyCanvas$ = MyCanvas.getContext("2d");
+			var divSize = 10;
+			var MyData = [4,6,1,7,2,4,2,8,2,4,5,8,2,5,2,4,1,2,1,4,2,4,5,0,];
+
+			for (var i = 0; i <= (MyCanvas.width / divSize); i++) {
+				MyCanvas$.moveTo(0, i * divSize);
+				MyCanvas$.lineTo(MyCanvas.width, i * divSize);
+				MyCanvas$.moveTo(i * divSize, 0);
+				MyCanvas$.lineTo(i * divSize, MyCanvas.width, i * divSize);
+			}
+			
+			MyCanvas$.lineWidth = 1;
+			MyCanvas$.strokeStyle = "#000";
+			MyCanvas$.stroke();
+			
+				MyCanvas$.beginPath();
+				MyCanvas$.moveTo(0,MyCanvas.height);
+
+			for (var i = 0; i < MyData.length;i++){
+				var x = (MyCanvas.width / MyData.length) * (i + 1) ;
+				var y = MyCanvas.height - (MyData[i] *  (MyCanvas.height / divSize));
+				MyCanvas$.lineTo(x,y);
+			}
+			
+			
+			MyCanvas$.lineWidth = 4;
+			MyCanvas$.strokeStyle = "#6cf";
+			MyCanvas$.stroke();
+		</script>
+	</body>
+</html>
