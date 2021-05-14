@@ -8,6 +8,9 @@
   <div>
     <button @click="()=>this.$router.push('customRef')">★customRef的使用</button>
   </div>
+  <div>
+    <button @click="()=>this.$router.push('exampleAPI')">★手写组合API</button>
+  </div>
 </template>
 
 <script setup>

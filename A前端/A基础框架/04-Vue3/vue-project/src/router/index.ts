@@ -23,6 +23,11 @@ const routes: Array<RouteRecordRaw> = [
     name:'customRef',
     component:()=>import('@/pages/03-★customRef的使用/index.vue')
   },
+  {
+    path:'/exampleAPI',
+    name:'exampleAPI',
+    component:()=>import('@/pages/04-★手写组合API/index.vue')
+  },
 ]
 
 const router = createRouter({
