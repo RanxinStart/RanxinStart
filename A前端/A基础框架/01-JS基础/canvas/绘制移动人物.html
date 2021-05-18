@@ -15,14 +15,14 @@
 		<canvas id="MyCanvas" width="500px" height="500px">
 			<!-- 浏览器不支持canvas时会把它当作div，显示里面的内容！ -->
 		</canvas>
-		
+
 		<script type="text/javascript">
 			var MyCanvas = document.getElementById("MyCanvas");
-			var MyCanvas$ = MyCanvas.getContext("2d");				
+			var MyCanvas$ = MyCanvas.getContext("2d");
 
 				var 图片对象 = new Image;
-				图片对象.src = "../素材/像素人物行走0.png";
-				
+				图片对象.src = "./images/0.png";
+
 				图片对象.onload = function(){
 					图片对象.onload = false;
 					var 帧 = 0;
@@ -57,10 +57,10 @@
 						MyCanvas$.font = "15px 微软雅黑";
 						MyCanvas$.fillText("角色编号" + 图片对象.src[图片对象.src.length-5],5,5);
 						MyCanvas$.fillText("移动速度" + 移动速度,5,20);
-						
-						
+
+
 					},1000 / 帧数);
-					
+
 					document.onkeydown = function(E){
 						E.keyCode == 37 ? 动作 = 1 :[];E.keyCode == 37 ? 位置X += -移动速度 :[];
 						E.keyCode == 38 ? 动作 = 3 :[];E.keyCode == 38 ? 位置Y += -移动速度 :[];
@@ -68,12 +68,12 @@
 						E.keyCode == 40 ? 动作 = 0 :[];E.keyCode == 40 ? 位置Y += 移动速度 :[];
 						E.keyCode == 107 ? 移动速度 += 1 :[];E.keyCode == 109 ? 移动速度 -= 1 :[];
 						for(var i=0;i<6;i++){
-							E.keyCode == (96 + i) ? 图片对象.src = "../素材/像素人物行走" + i + ".png" :[];
+							E.keyCode == (96 + i) ? 图片对象.src = "./images/" + i + ".png" :[];
 						}
 					}
 				}
-				
-			
+
+
 		</script>
 	</body>
 </html>
