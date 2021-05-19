@@ -30,11 +30,19 @@ $ yarn global add umi # 或者 npm install -g umi
 
 ---
 
-## 别名配置
+## 通常配置(resolve)
 
-> 目标文件 > vite.config.js
+> 目标 > vite.config.js > resolve
+
+### 别名配置
+
+> resolve.alias
+>
+> **类型:**	``string``
 
 配置路径别名 @ 和 ~ 两个路径
+
+此处用了**node**的`resolve`方法 自动拼接路径
 
 ```js
 resolve: {
@@ -45,9 +53,27 @@ resolve: {
   },
 ```
 
+### 导入省略扩展名配置
+
+>  resolve.extensions
+>
+> **类型：** `string[]`
+>
+> **默认：** `['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json']`
+
+导入时想要省略的扩展名列表。注意，**不** 建议忽略自定义导入类型的扩展名（例如：`.vue`），因为它会干扰 IDE 和类型支持。
+
+```js
+resolve: {
+  extensions:['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json']
+},
+```
+
+
+
 ## 服务器配置
 
-> 目标文件 > vite.config.js
+> 目标 > vite.config.js > server
 
 ### 指定服务器端口
 
