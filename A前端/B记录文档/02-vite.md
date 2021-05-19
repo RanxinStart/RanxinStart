@@ -30,9 +30,35 @@ $ yarn global add umi # 或者 npm install -g umi
 
 ---
 
+---
+
 ## 通常配置(resolve)
 
 > 目标 > vite.config.js > resolve
+
+---
+
+### 公共基础路径(base)
+
+> base
+>
+> **类型：** `string`
+>
+> **默认：** `/`
+
+开发或生产环境服务的公共基础路径。合法的值包括以下几种：
+
+- 绝对 URL 路径名，例如 `/foo/`
+- 完整的 URL，例如 `https://foo.com/`
+- 空字符串或 `./`（用于开发环境）
+
+```js
+base: '/addons/weitshop_shop/weshop/public/home/backend/'
+```
+
+
+
+---
 
 ### 别名配置
 
@@ -53,6 +79,8 @@ resolve: {
   },
 ```
 
+---
+
 ### 导入省略扩展名配置
 
 >  resolve.extensions
@@ -69,17 +97,23 @@ resolve: {
 },
 ```
 
+---
 
+---
 
 ## 服务器配置
 
 > 目标 > vite.config.js > server
+
+---
 
 ### 指定服务器端口
 
 > server.port
 >
 > **类型：** `number`
+>
+> **默认：** `3000`
 
 指定服务器端口。注意：如果端口已经被使用，Vite 会自动尝试下一个可用的端口，所以这可能不是服务器最终监听的实际端口。
 
