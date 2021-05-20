@@ -74,7 +74,7 @@ base: '/addons/weitshop_shop/weshop/public/home/backend/'
 resolve: {
     alias: {
       '@': resolve(__dirname, 'src'),
-      '~': resolve(__dirname, 'src')
+      '~': resolve(__dirname, 'src/components')
     }
   },
 ```
