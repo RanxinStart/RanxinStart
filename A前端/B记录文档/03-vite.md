@@ -14,7 +14,7 @@ tags:
 
 ---
 
-## 使用yarn安装
+## 初始化安装
 
 ### 1.先安装``yarn``
 
@@ -22,13 +22,20 @@ tags:
 $ npm i yarn -g
 ```
 
-### 2.然后全局安装`umi`
+### 2.使用`yarn`初始化一个`vite + vue`项目
 
 ```bash
-$ yarn global add umi # 或者 npm install -g umi
-```
+$ yarn create @vitejs/app  #初始化vite项目
 
----
+# 初始化 Start #
+√ Project name: ... RanxinForVue
+√ Package name: ... ranxinforvue
+√ Select a framework: » vue
+√ Select a variant: » vue-ts
+# 初始化 End #
+
+$ yarn #安装依赖
+```
 
 ---
 
