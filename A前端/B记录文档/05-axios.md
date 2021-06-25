@@ -50,6 +50,7 @@ http.defaults.baseURL = 'https://baidu.com/'
 
 
 
+
 # Code And Application
 
 > 代码 和 应用场景
@@ -85,6 +86,79 @@ http.interceptors.response.use(
     }
 )
     
+```
+
+## 上传文件
+
+> 手动实现文件上传
+
+### 0.file文件选择
+
+> 非`axios`内容 原生通过`input`进行选择 使用`promise`拿到结果
+
+```js
+export const selectImages = (multiple = true) => {
+  return new Promise<File[]>((resolve, reject) => {
+    // 创建一个input
+    const inputEl = document.createElement('input')
+    // 类型是文件选择器
+    inputEl.type = 'file'
+    // 是否开启多选
+    inputEl.multiple = multiple
+    // 可选择的文件格式
+    inputEl.accept = 'image/jpeg,image/x-png,image/gif'
+    // 模拟点击 进行选择文件
+    inputEl.click()
+    const timer = setTimeout(reject, 20 * 1000)
+    inputEl.addEventListener('change', function () {
+      if (this.files) {
+        resolve(Object.values(this.files))
+        clearTimeout(timer)
+      }
+    })
+  })
+}
+
+const getFile = async() => {
+    // 这里取到选择文件的files
+    const files = await selectImages()
+}
+```
+
+### 1.form表单的形式请求
+
+```js
+const formData = new FormData()
+formData.append('dataNmae', 'dataContent')
+formData.append('file', '(binary)')
+```
+
+### 2.修改发送的headers
+
+```js
+const config = {
+    headers: { 'Content-Type': 'multipart/form-data' }
+}
+
+// 单实例
+http.post('/api', formData, config)
+
+// axios
+axios.post('/api', formData, config)
+```
+
+### `*`完整示例
+
+```js
+// 创建FormData
+const formData = new FormData()
+// 添加FormData数据
+formData.append('dataNmae', 'dataContent')
+formData.append('file', '(binary)')
+// 发送请求示例
+http.post('/api', formData, {
+  headers: { 'Content-Type': 'multipart/form-data' }
+})
 ```
 
 
