@@ -1,8 +1,8 @@
 ---
-title: 这里是标题
-date: 现在的时间
+title: vuepress插件开发
+date: 2021年7月2日 17:18:53
 categories:
-  - 划分的文件夹
+  - vue
 tags: 
   - 标签
 
@@ -42,11 +42,20 @@ plugins: [
 
 ```
 
-### 1.同项目写插件目录
+### 1.插件目录
 
-### 2.分项目写插件目录
+> 目标文件放任意文字 引入的时候使用 require('dir/vuepress-plugin-typing')引入进行调试
 
-### 3.配置插件基础
+```bash
+vuepress-plugin-typing #文件名(插件名)
+├── index.js # 入口文件 当 require('dir/vuepress-plugin-typing') 会运行index
+├── lib # 其他包
+|  └── enhanceApp.js # 这里文件名可以直接定，需要index中enhanceAppFiles设置使用
+├── package.json # 需要依赖的配置和
+└── README.md # 说明
+```
+
+### 2.配置插件基础
 
 #### 1.初始化一个package.json
 
