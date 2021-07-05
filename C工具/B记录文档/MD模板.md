@@ -1,12 +1,16 @@
 ---
-title: Koa服务端
-date: '2021-7-5 23:18:07'
+title: 标题
+date: '2019-08-08 08:00:00'
+sidebar: 'auto'
 categories:
- - 服务端
+ - 烹饪
+ - 爱好
 tags:
- - Koa
- - Server
- - node
+ - 烤
+ - 鸭子
+keys: #文章加密密码
+ - '123456'
+publish: false #文章是否发布
 ---
 
 # Build And Config
@@ -15,7 +19,7 @@ tags:
 
 ---
 
-## 使用yarn安装
+## 使用yarn安装 
 
 ### 1.先安装``yarn``
 
@@ -100,12 +104,9 @@ const routes = [
 
 **没有报错！** 这是应用部署在非根路径的典型现象。为啥会有这个问题？因为路由没有匹配上，比如你把应用部署在 `/xxx/` 下，然后访问 `/xxx/hello`，而代码里匹配的是 `/hello`，那就匹配不上了，而又没有定义 fallback 的路由，比如 404，那就会显示空白页。
 
-### 怎么解决？
+::: theorem 牛顿第一定律
+假若施加于某物体的外力为零，则该物体的运动速度不变。
 
->  可通过配置 [base](https://v2.umijs.org/zh/config/#base) 解决。
-
-```bash
-export default {
-  base: '/path/to/your/app/root',
-};
-```
+::: right
+来自 [维基百科](https://zh.wikipedia.org/wiki/%E7%89%9B%E9%A1%BF%E8%BF%90%E5%8A%A8%E5%AE%9A%E5%BE%8B)
+:::
