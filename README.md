@@ -1,6 +1,6 @@
 ![O](https://github-readme-stats.vercel.app/api?username=RanxinStart&count_private=true&show_icons=true&theme=slateorange&include_all_commits=true&hide_border=true&locale=cn)
 
-![O](https://github-readme-stats.vercel.app/api/wakatime?username=@Ranxin&theme=slateorange&hide_border=true&locale=cn)
+![O](https://github-readme-stats.vercel.app/api/wakatime?username=Ranxin&theme=slateorange&hide_border=true&locale=cn)
 
 <!--
 ![O](https://github-readme-stats.vercel.app/api/top-langs/?username=RanxinStart&layout=compact&theme=slateorange&hide_border=true&locale=cn)
