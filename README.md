@@ -1,7 +1,8 @@
 ![O](https://github-readme-stats.vercel.app/api?username=RanxinStart&count_private=true&show_icons=true&theme=slateorange&include_all_commits=true)
-![O](https://github-readme-stats.vercel.app/api/top-langs/?username=RanxinStart&layout=compact)
 
-![O](https://github-readme-stats.vercel.app/api/wakatime?username=@Ranxin)
+![O](https://github-readme-stats.vercel.app/api/top-langs/?username=RanxinStart&layout=compact&theme=slateorange)
+
+![O](https://github-readme-stats.vercel.app/api/wakatime?username=@Ranxin&theme=slateorange)
 
 <!--
 **RanxinStart/RanxinStart** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
